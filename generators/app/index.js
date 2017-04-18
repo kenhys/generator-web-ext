@@ -20,6 +20,12 @@ module.exports = class extends Generator {
       message: 'Give a description for your web extension',
     },
     {
+      name: 'destinationFolder',
+      message: 'Do you want to scaffold your web extension in the current folder?',
+      type: 'confirm',
+      default: true
+    },
+    {
       name: 'popup',
       message: 'Would you like to use a popup?',
       type: 'confirm',
@@ -44,7 +50,15 @@ module.exports = class extends Generator {
         name: this.appname,
         description: answers.description
       }
+      this.destinationFolder = answers.destinationFolder;
     });
+  }
+
+  destinationFolder() {
+    if (!this.destinationFolder) {
+      mkdirp(this.appname);
+      this.destinationRoot(this.destinationPath(this.appname));
+    }
   }
 
   packageJSON() {
@@ -77,6 +91,8 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.installDependencies();
+    if (!this.options['skip-install']) {
+      this.installDependencies({bower: false});
+    }
   }
 };
