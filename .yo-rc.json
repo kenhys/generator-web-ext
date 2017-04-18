@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Cesar Carruitero",
+      "authorEmail": "cesar@mozilla.pe",
+      "authorUrl": ""
+    }
+  }
+}
