@@ -59,6 +59,8 @@ module.exports = class extends Generator {
       }
       this.destinationFolder = answers.destinationFolder;
       this.permissions = answers.permissions;
+      this.popup = answers.popup;
+      this.background = answers.background;
     });
   }
 
@@ -84,6 +86,23 @@ module.exports = class extends Generator {
       this.templatePath('_manifest.json'),
       this.destinationPath('extension/manifest.json')
     );
+    if (this.popup) {
+      this.fs.write(this.destinationPath('extension/popup/index.html'), '');
+      this.fs.extendJSON(this.destinationPath('extension/manifest.json'), {
+        browser_action: {
+          browser_style: true,
+          default_popup: 'popup/index.html'
+        }
+      });
+    }
+    if (this.background) {
+      this.fs.write(this.destinationPath('extension/background/index.js'), '');
+      this.fs.extendJSON(this.destinationPath('extension/manifest.json'), {
+        background: {
+          scripts: 'background/index.js'
+        }
+      });
+    }
     if (this.permissions.length > 0) {
       this.fs.extendJSON(this.destinationPath('extension/manifest.json'), {
         permissions: this.permissions
