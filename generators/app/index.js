@@ -3,6 +3,7 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 const mkdirp = require('mkdirp');
+const manifestOptions = require('./manifestOptions');
 
 module.exports = class extends Generator {
   prompting() {
@@ -42,6 +43,12 @@ module.exports = class extends Generator {
       message: 'Would you like to use a background script?',
       type: 'confirm',
       default: false
+    },
+    {
+      type: 'checkbox',
+      name: 'permissions',
+      message: 'Would you like to set permissions?',
+      choices: manifestOptions.permissionChoices
     }];
 
     return this.prompt(prompts).then(answers => {
@@ -51,6 +58,7 @@ module.exports = class extends Generator {
         description: answers.description
       }
       this.destinationFolder = answers.destinationFolder;
+      this.permissions = answers.permissions;
     });
   }
 
@@ -76,6 +84,11 @@ module.exports = class extends Generator {
       this.templatePath('_manifest.json'),
       this.destinationPath('extension/manifest.json')
     );
+    if (this.permissions.length > 0) {
+      this.fs.extendJSON(this.destinationPath('extension/manifest.json'), {
+        permissions: this.permissions
+      })
+    }
   }
 
   extensionDirectory() {
