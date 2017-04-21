@@ -46,7 +46,7 @@ describe('generator-web-ext:app', () => {
     });
   });
 
-  it('set background', done => {
+  it('can set background', done => {
     run({
       background: true
     }, () => {
@@ -56,7 +56,7 @@ describe('generator-web-ext:app', () => {
     });
   });
 
-  it('set permissions in manifest', done => {
+  it('can set permissions in manifest', done => {
     run({
       permissions: ['alarms', 'activeTab']
     }, () => {
@@ -65,6 +65,29 @@ describe('generator-web-ext:app', () => {
           ['extension/manifest.json', 'alarms'],
           ['extension/manifest.json', 'activeTab']
       ]);
+      done();
+    });
+  });
+
+  it('can set content script', done => {
+    run({
+      contentScript: true
+    }, () => {
+      assert.fileContent('extension/manifest.json', 'content_scripts');
+      assert.fileContent('extension/manifest.json', '<all_urls>');
+      assert.file('extension/content_scripts/index.js');
+      done();
+    });
+  });
+
+  it('can set match pattern for content script', done => {
+    run({
+      contentScript: true,
+      contentScriptMatch: '*://*.mozilla.org/*'
+    }, () => {
+      assert.fileContent('extension/manifest.json', 'content_scripts');
+      assert.fileContent('extension/manifest.json', '*://*.mozilla.org/*');
+      assert.file('extension/content_scripts/index.js');
       done();
     });
   });

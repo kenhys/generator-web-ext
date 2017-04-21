@@ -33,10 +33,18 @@ module.exports = class extends Generator {
       default: true
     },
     {
-      name: 'content_script',
+      name: 'contentScript',
       message: 'Would you like to use a content script?',
       type: 'confirm',
       default: false
+    },
+    {
+      type: 'input',
+      name: 'contentScriptMatch',
+      message: 'Define a match pattern for your content script?',
+      when: response => {
+        return response.contentScript;
+      }
     },
     {
       name: 'background',
@@ -61,6 +69,10 @@ module.exports = class extends Generator {
       this.permissions = answers.permissions;
       this.popup = answers.popup;
       this.background = answers.background;
+      this.contentScript = {
+        script: answers.contentScript,
+        match: answers.contentScriptMatch
+      };
     });
   }
 
@@ -101,6 +113,18 @@ module.exports = class extends Generator {
         background: {
           scripts: 'background/index.js'
         }
+      });
+    }
+    if (this.contentScript.script) {
+      this.fs.write(this.destinationPath('extension/content_scripts/index.js'), '');
+      const match = this.contentScript.match || '<all_urls>';
+      this.fs.extendJSON(this.destinationPath('extension/manifest.json'), {
+        content_scripts: [
+          {
+            matches: [match],
+            js: 'content_scripts/index.js'
+          }
+        ]
       });
     }
     if (this.permissions && (this.permissions.length > 0)) {
