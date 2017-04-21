@@ -18,7 +18,7 @@ module.exports = class extends Generator {
     },
     {
       name: 'description',
-      message: 'Give a description for your web extension',
+      message: 'Give a description for your web extension'
     },
     {
       name: 'destinationFolder',
@@ -56,7 +56,7 @@ module.exports = class extends Generator {
       this.locale = {
         name: this.appname,
         description: answers.description
-      }
+      };
       this.destinationFolder = answers.destinationFolder;
       this.permissions = answers.permissions;
       this.popup = answers.popup;
@@ -76,7 +76,7 @@ module.exports = class extends Generator {
       this.templatePath('_package.json'),
       this.destinationPath('package.json'),
       {
-        appname: this.appname 
+        appname: this.appname
       }
     );
   }
@@ -103,10 +103,10 @@ module.exports = class extends Generator {
         }
       });
     }
-    if (this.permissions.length > 0) {
+    if (this.permissions && (this.permissions.length > 0)) {
       this.fs.extendJSON(this.destinationPath('extension/manifest.json'), {
         permissions: this.permissions
-      })
+      });
     }
   }
 

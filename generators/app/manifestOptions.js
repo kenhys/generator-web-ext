@@ -21,18 +21,18 @@ const availablePermissions = [
   'webNavigation',
   'webRequest',
   'webRequestBlocking'
-]
+];
 
 function getChoices(list) {
-	return list.map((item) => {
-		return {
-			value: item,
-			name: item,
-			checked: false
-		}
-	});
+  return list.map(item => {
+    return {
+      value: item,
+      name: item,
+      checked: false
+    };
+  });
 }
 
 module.exports = {
-	permissionChoices: getChoices(availablePermissions)
-}
+  permissionChoices: getChoices(availablePermissions)
+};
