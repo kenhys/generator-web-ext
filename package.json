@@ -40,7 +40,7 @@
   "scripts": {
     "prepublish": "nsp check",
     "lint": "eslint . --fix",
-    "test": "jest --watchAll"
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": "xo-space",
