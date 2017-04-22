@@ -4,5 +4,9 @@
     "dependencies": {},
     "devDependencies": {
         "web-ext": "^1.9.0"
+    },
+    "scripts": {
+      "build": "web-ext build -s extension/",
+      "start": "web-ext run -s extension/"
     }
 }
