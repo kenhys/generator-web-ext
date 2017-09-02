@@ -1,6 +1,6 @@
-# generator-web-ext [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-web-ext
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/ccarruitero/generator-web-ext.svg)](https://greenkeeper.io/)
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url][![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 > A generator for Web Extensions
 
 ## Installation
@@ -38,3 +38,5 @@ MPL-2.0 © [Cesar Carruitero]()
 [daviddm-url]: https://david-dm.org/ccarruitero/generator-web-ext
 [coveralls-image]: https://coveralls.io/repos/ccarruitero/generator-web-ext/badge.svg
 [coveralls-url]: https://coveralls.io/r/ccarruitero/generator-web-ext
+[greenkeeper-image]: https://badges.greenkeeper.io/ccarruitero/generator-web-ext.svg
+[greenkeeper-url]: https://greenkeeper.io/
